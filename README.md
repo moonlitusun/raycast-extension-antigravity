@@ -2,7 +2,7 @@
 
 A Raycast extension for quickly searching and opening projects in your code directory with Antigravity IDE.
 
-<video src="https://user-images.githubusercontent.com/21974345/256122021-94679b6c-108c-4900-960f-85e4b1166142.mp4" />
+<video src="./media/antigravity-search.mp4" />
 
 ## ✨ Features
 
