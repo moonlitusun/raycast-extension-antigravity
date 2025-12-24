@@ -24,7 +24,10 @@ export function getIgnoredFoldersPattern(): RegExp {
     try {
       return new RegExp(process.env.ANTIGRAVITY_IGNORED_FOLDERS_PATTERN);
     } catch (error) {
-      console.warn("Invalid regex in ANTIGRAVITY_IGNORED_FOLDERS_PATTERN:", error);
+      console.warn(
+        "Invalid regex in ANTIGRAVITY_IGNORED_FOLDERS_PATTERN:",
+        error,
+      );
     }
   }
 
