@@ -4,7 +4,7 @@ A Raycast extension for quickly searching and opening projects in your code dire
 
 https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 
-*If you can't see the video, you can click right button and select "Open video in new tab" to see it.*
+*Tip:If you can't see the video, you can click right button and select "Open video in new tab" to see it.*
 
 ## ✨ Features
 
