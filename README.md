@@ -4,6 +4,8 @@ A Raycast extension for quickly searching and opening projects in your code dire
 
 https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 
+*If you can't see the video, you can click right click and select "Open in new tab" to see it.*
+
 ## ✨ Features
 
 - 🔍 **Smart Search** - Fast fuzzy search through all your project folders
