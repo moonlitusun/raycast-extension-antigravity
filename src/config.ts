@@ -7,8 +7,29 @@ import { getPreferenceValues } from "@raycast/api";
 
 config();
 
-export const IGNORED_FOLDERS_PATTERN =
+const DEFAULT_IGNORED_FOLDERS_PATTERN =
   /^\.|^(node_modules|venv|__pycache__|target|dist|build|vendor|bower_components)$/;
+
+export function getIgnoredFoldersPattern(): RegExp {
+  try {
+    const preferences = getPreferenceValues<Preferences>();
+    if (preferences.ignoredFoldersPattern) {
+      return new RegExp(preferences.ignoredFoldersPattern);
+    }
+  } catch (error) {
+    console.warn("Error reading ignoredFoldersPattern preference:", error);
+  }
+
+  if (process.env.ANTIGRAVITY_IGNORED_FOLDERS_PATTERN) {
+    try {
+      return new RegExp(process.env.ANTIGRAVITY_IGNORED_FOLDERS_PATTERN);
+    } catch (error) {
+      console.warn("Invalid regex in ANTIGRAVITY_IGNORED_FOLDERS_PATTERN:", error);
+    }
+  }
+
+  return DEFAULT_IGNORED_FOLDERS_PATTERN;
+}
 
 export function getAgyCommandPath(): string {
   try {

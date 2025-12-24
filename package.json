@@ -24,7 +24,7 @@
       "title": "Projects Directory",
       "type": "directory",
       "required": false,
-      "default": "/Users/rocsun/Code",
+      "default": "~/Code",
       "description": "The path to the directory to search for projects"
     },
     {
@@ -42,6 +42,14 @@
       "required": false,
       "default": "",
       "description": "Full path to the agy command (leave empty to use default: ~/.antigravity/antigravity/bin/agy)"
+    },
+    {
+      "name": "ignoredFoldersPattern",
+      "title": "Ignored Folders Pattern",
+      "type": "textfield",
+      "required": false,
+      "default": "^\\.|^(node_modules|venv|__pycache__|target|dist|build|vendor|bower_components)$",
+      "description": "Regex pattern for folders to ignore during search (leave empty to use default)"
     }
   ],
   "dependencies": {
@@ -65,5 +73,8 @@
     "lint": "ray lint",
     "publish": "pnpx @raycast/api@latest publish",
     "ray": "ray"
+  },
+  "volta": {
+    "node": "22.21.1"
   }
 }

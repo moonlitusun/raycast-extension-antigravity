@@ -13,7 +13,9 @@ type ExtensionPreferences = {
   /** Search Depth - How many levels deep to search for folders (1-5) */
   "searchDepth": string,
   /** Antigravity Command Path - Full path to the agy command (leave empty to use default: ~/.antigravity/antigravity/bin/agy) */
-  "agyCommandPath": string
+  "agyCommandPath": string,
+  /** Ignored Folders Pattern - Regex pattern for folders to ignore during search (leave empty to use default) */
+  "ignoredFoldersPattern": string
 }
 
 /** Preferences accessible in all the extension's commands */

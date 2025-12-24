@@ -10,7 +10,7 @@ import { getPreferenceValues, showHUD, showToast, Toast } from "@raycast/api";
 import { exec } from "child_process";
 import { promisify } from "util";
 import {
-  IGNORED_FOLDERS_PATTERN,
+  getIgnoredFoldersPattern,
   getAgyCommandPath,
   getDefaultSearchFolder,
 } from "./config";
@@ -88,7 +88,7 @@ async function findProjects(
     const entries = await fs.readdir(dirPath, { withFileTypes: true });
 
     for (const entry of entries) {
-      if (entry.isDirectory() && !IGNORED_FOLDERS_PATTERN.test(entry.name)) {
+      if (entry.isDirectory() && !getIgnoredFoldersPattern().test(entry.name)) {
         const fullPath = path.join(dirPath, entry.name);
         const lastModifiedTime = await getLastModifiedTime(fullPath);
 
