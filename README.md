@@ -64,6 +64,7 @@ Access preferences through: Raycast → Extensions → Antigravity Search → Pr
 The root directory where your projects are located. The extension will search within this directory.
 
 **Examples:**
+
 - `~/Code` - Your home code directory
 - `~/Documents/Projects` - Custom projects folder
 - `/Users/username/workspace` - Absolute path
@@ -84,17 +85,108 @@ How many folder levels deep to search. Higher values find more projects but take
 
 **Default:** `~/.antigravity/antigravity/bin/agy`
 
-Custom path to the `agy` command if it's not in the default location.
+The full path to the Antigravity IDE command-line executable. This extension uses this command to open your projects in Antigravity IDE.
 
-**When to use:**
-- Custom Antigravity installation location
-- Multiple Antigravity versions
-- Non-standard installation paths
+#### 🔍 How to Find Your Command Path
 
-**Example:**
+If you're not sure where your `agy` command is located, try these methods:
+
+**Method 1: Using `which` command**
+
+```bash
+which agy
 ```
+
+This will show the path if `agy` is in your system PATH. Common output:
+
+- `/usr/local/bin/agy`
+- `/opt/homebrew/bin/agy`
+- `~/.antigravity/antigravity/bin/agy`
+
+**Method 2: Using `find` command**
+
+```bash
+find ~ -name "agy" -type f 2>/dev/null
+```
+
+This searches your home directory for the `agy` executable.
+
+**Method 3: Check Antigravity installation directory**
+
+```bash
+ls -la ~/.antigravity/antigravity/bin/agy
+```
+
+#### 📍 Common Installation Locations
+
+| Installation Method      | Typical Path                         |
+|--------------------------|--------------------------------------|
+| Official installer       | `~/.antigravity/antigravity/bin/agy` |
+| Homebrew (Intel)         | `/usr/local/bin/agy`                 |
+| Homebrew (Apple Silicon) | `/opt/homebrew/bin/agy`              |
+| Manual installation      | `/usr/local/bin/agy`                 |
+| Custom location          | Wherever you installed it            |
+
+#### ⚙️ Configuration Examples
+
+**Using default location:**
+
+```text
+~/.antigravity/antigravity/bin/agy
+```
+
+**Using Homebrew installation:**
+
+```text
 /usr/local/bin/agy
 ```
+
+**Using custom installation:**
+
+```text
+/Users/username/Applications/Antigravity/agy
+```
+
+#### ⚠️ Important Notes
+
+- **Use absolute paths**: Always provide the full path (e.g., `/usr/local/bin/agy` or `~/.antigravity/antigravity/bin/agy`)
+- **Tilde expansion**: The `~` symbol is supported and will expand to your home directory
+- **No quotes needed**: Don't wrap the path in quotes in the preferences field
+- **Verify the path**: Make sure the file exists and is executable before saving
+
+#### 🔧 Troubleshooting Command Path
+
+**Error: "Command not found" or "Failed to open with Antigravity"**
+
+1. **Verify the file exists:**
+
+   ```bash
+   ls -la ~/.antigravity/antigravity/bin/agy
+   ```
+
+2. **Check if it's executable:**
+
+   ```bash
+   chmod +x ~/.antigravity/antigravity/bin/agy
+   ```
+
+3. **Test the command manually:**
+
+   ```bash
+   ~/.antigravity/antigravity/bin/agy -n ~/Code/my-project
+   ```
+
+4. **Check for typos:** Make sure there are no extra spaces or characters in the path
+
+**For other IDE commands:**
+
+This extension can work with other IDEs by changing the command path:
+
+- **Cursor:** `/usr/local/bin/cursor` or `/Applications/Cursor.app/Contents/Resources/app/bin/cursor`
+- **VSCode:** `/usr/local/bin/code` or `/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code`
+- **Neovim:** `/usr/local/bin/nvim`
+
+Just make sure the command supports the `-n` flag for opening a new window with a directory.
 
 ### Ignored Folders Pattern
 
@@ -103,6 +195,7 @@ Custom path to the `agy` command if it's not in the default location.
 Regular expression pattern for folders to exclude from search results.
 
 **Default pattern ignores:**
+
 - Hidden folders (starting with `.`)
 - `node_modules` - Node.js dependencies
 - `venv` - Python virtual environments
@@ -116,17 +209,20 @@ Regular expression pattern for folders to exclude from search results.
 **Custom pattern examples:**
 
 Ignore only hidden folders and node_modules:
-```
+
+```regex
 ^\.|^node_modules$
 ```
 
 Ignore additional folders:
-```
+
+```regex
 ^\.|^(node_modules|venv|temp|cache|logs)$
 ```
 
 Ignore nothing (search all folders):
-```
+
+```regex
 ^$
 ```
 

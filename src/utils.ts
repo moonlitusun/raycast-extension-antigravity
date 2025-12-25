@@ -7,7 +7,7 @@ import path from "path";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import { getPreferenceValues, showHUD, showToast, Toast } from "@raycast/api";
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import { promisify } from "util";
 import {
   getIgnoredFoldersPattern,
@@ -15,7 +15,7 @@ import {
   getDefaultSearchFolder,
 } from "./config";
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 export function getRelativeTime(timestamp: number) {
   dayjs.extend(relativeTime);
@@ -38,7 +38,7 @@ export function expandPath(inputPath: string): string {
 export async function openInAntigravity(projectPath: string): Promise<void> {
   try {
     const agyPath = getAgyCommandPath();
-    await execAsync(`${agyPath} -n "${projectPath}"`);
+    await execFileAsync(agyPath, ["-n", projectPath]);
     await showHUD(`Opening ${path.basename(projectPath)} with Antigravity`);
   } catch (error) {
     console.error("Error opening with Antigravity:", error);
@@ -63,7 +63,7 @@ export async function loadProjects(): Promise<Project[]> {
 
     const projects = await findProjects(expandedPath, maxDepth);
     return projects.sort(
-      (a, b) => (b.lastModifiedTime ?? 0) - (a.lastModifiedTime ?? 0),
+      (a, b) => (b.lastModifiedTime ?? 0) - (a.lastModifiedTime ?? 0)
     );
   } catch (error) {
     console.error("Error loading projects:", error);
@@ -78,7 +78,7 @@ export async function loadProjects(): Promise<Project[]> {
 
 async function findProjects(
   dirPath: string,
-  maxDepth: number,
+  maxDepth: number
 ): Promise<Project[]> {
   if (maxDepth === 0) return [];
 
