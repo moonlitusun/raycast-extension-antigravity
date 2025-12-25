@@ -63,7 +63,7 @@ export async function loadProjects(): Promise<Project[]> {
 
     const projects = await findProjects(expandedPath, maxDepth);
     return projects.sort(
-      (a, b) => (b.lastModifiedTime ?? 0) - (a.lastModifiedTime ?? 0)
+      (a, b) => (b.lastModifiedTime ?? 0) - (a.lastModifiedTime ?? 0),
     );
   } catch (error) {
     console.error("Error loading projects:", error);
@@ -78,7 +78,7 @@ export async function loadProjects(): Promise<Project[]> {
 
 async function findProjects(
   dirPath: string,
-  maxDepth: number
+  maxDepth: number,
 ): Promise<Project[]> {
   if (maxDepth === 0) return [];
 
