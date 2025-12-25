@@ -2,6 +2,8 @@
 
 A Raycast extension for quickly searching and opening projects in your code directory with Antigravity IDE.
 
+[![raycast-cross-extension-badge]][raycast-cross-extension-link]
+
 https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 
 *Tip:If you can't see the video, you can click right button and select "Open video in new tab" to see it.*
@@ -45,11 +47,11 @@ https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 
 ### Available Actions
 
-| Action | Shortcut | Description |
-|--------|----------|-------------|
-| Open with Antigravity | `Enter` | Opens the project in Antigravity IDE |
-| Show in Finder | `⌘ + Enter` | Opens the project folder in Finder |
-| Copy Path | `⌘ + C` | Copies the full project path to clipboard |
+| Action                | Shortcut    | Description                               |
+| --------------------- | ----------- | ----------------------------------------- |
+| Open with Antigravity | `Enter`     | Opens the project in Antigravity IDE      |
+| Show in Finder        | `⌘ + Enter` | Opens the project folder in Finder        |
+| Copy Path             | `⌘ + C`     | Copies the full project path to clipboard |
 
 ## ⚙️ Configuration
 
