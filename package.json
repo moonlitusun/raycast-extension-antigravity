@@ -72,6 +72,7 @@
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
     "publish": "pnpx @raycast/api@latest publish",
+    "pull-contributions": "pnpx @raycast/api@latest pull-contributions",
     "ray": "ray"
   },
   "volta": {
