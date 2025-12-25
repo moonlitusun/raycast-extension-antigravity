@@ -1,9 +1,9 @@
 /// <reference types="../raycast-env.d.ts" />
 
-import { homedir } from "os";
-import path from "path";
-import { config } from "dotenv";
-import { getPreferenceValues } from "@raycast/api";
+import { homedir } from 'os';
+import path from 'path';
+import { config } from 'dotenv';
+import { getPreferenceValues } from '@raycast/api';
 
 config();
 
@@ -17,7 +17,7 @@ export function getIgnoredFoldersPattern(): RegExp {
       return new RegExp(preferences.ignoredFoldersPattern);
     }
   } catch (error) {
-    console.warn("Error reading ignoredFoldersPattern preference:", error);
+    console.warn('Error reading ignoredFoldersPattern preference:', error);
   }
 
   if (process.env.ANTIGRAVITY_IGNORED_FOLDERS_PATTERN) {
@@ -25,8 +25,8 @@ export function getIgnoredFoldersPattern(): RegExp {
       return new RegExp(process.env.ANTIGRAVITY_IGNORED_FOLDERS_PATTERN);
     } catch (error) {
       console.warn(
-        "Invalid regex in ANTIGRAVITY_IGNORED_FOLDERS_PATTERN:",
-        error,
+        'Invalid regex in ANTIGRAVITY_IGNORED_FOLDERS_PATTERN:',
+        error
       );
     }
   }
@@ -48,7 +48,7 @@ export function getAgyCommandPath(): string {
     return process.env.ANTIGRAVITY_AGY_PATH;
   }
 
-  return path.join(homedir(), ".antigravity", "antigravity", "bin", "agy");
+  return path.join(homedir(), '.antigravity', 'antigravity', 'bin', 'agy');
 }
 
 export function getDefaultSearchFolder(): string {
@@ -65,5 +65,5 @@ export function getDefaultSearchFolder(): string {
     return process.env.ANTIGRAVITY_PROJECTS_DIR;
   }
 
-  return "/Users/rocsun/Code";
+  return path.join(homedir(), 'Code');
 }
