@@ -8,12 +8,19 @@ import {
   Icon,
 } from "@raycast/api";
 import path from "path";
-import { getRelativeTime, loadProjects, openInAntigravity } from "./utils";
-import { Project } from "./types";
+import { getRelativeTime, loadProjects, openWithEditor } from "./utils";
+import { EditorType } from "./types";
 import { usePromise } from "@raycast/utils";
 import { homedir } from "os";
 
-export default function Command() {
+const EDITOR_CONFIG: Record<EditorType, { title: string; icon: Icon }> = {
+  antigravity: { title: "Open with Antigravity", icon: Icon.Rocket },
+  cursor: { title: "Open with Cursor", icon: Icon.Code },
+  code: { title: "Open with VS Code", icon: Icon.Code },
+  trae: { title: "Open with Trae", icon: Icon.Code },
+};
+
+export function ProjectList({ editor }: { editor: EditorType }) {
   const {
     data: projects,
     isLoading,
@@ -33,9 +40,7 @@ export default function Command() {
     }
   }, [error]);
 
-  async function handleOpenProject(project: Project) {
-    await openInAntigravity(project.path);
-  }
+  const { title, icon } = EDITOR_CONFIG[editor];
 
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Search projects...">
@@ -58,9 +63,9 @@ export default function Command() {
               actions={
                 <ActionPanel>
                   <Action
-                    title="Open with Antigravity"
-                    icon={Icon.Rocket}
-                    onAction={async () => await handleOpenProject(project)}
+                    title={title}
+                    icon={icon}
+                    onAction={async () => await openWithEditor(editor, project.path)}
                   />
                   <Action.ShowInFinder path={project.path} />
                   <Action.CopyToClipboard
@@ -82,4 +87,8 @@ export default function Command() {
       )}
     </List>
   );
+}
+
+export default function Command() {
+  return <ProjectList editor="antigravity" />;
 }

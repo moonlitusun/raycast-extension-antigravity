@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 ## ✨ Features
 
 - 🔍 **Smart Search** - Fast fuzzy search through all your project folders
-- 🚀 **Quick Open** - Launch projects in Antigravity(Cursor/VSCode/Neovim/Or any other IDE) with a single keystroke
+- 🚀 **Multi-Editor Support** - Open projects with Antigravity, Cursor, VS Code, or Trae
 - 📁 **Folder Hierarchy** - View project paths and folder structure at a glance
 - ⏰ **Last Modified** - See when each project was last updated
 - 🎯 **Configurable Depth** - Control how deep to search (1-5 levels)
@@ -24,8 +24,11 @@ https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 ### Prerequisites
 
 - [Raycast](https://raycast.com/) installed
-- [Antigravity IDE](https://antigravity.dev/) installed
-- `agy` command available (usually at `~/.antigravity/antigravity/bin/agy`)
+- One or more supported editors installed:
+  - [Antigravity IDE](https://antigravity.dev/) with `agy` command
+  - [Cursor](https://cursor.com/) with `cursor` command
+  - [VS Code](https://code.visualstudio.com/) with `code` command
+  - [Trae](https://trae.ai/) with `trae` command
 
 ### Installation
 
@@ -39,7 +42,11 @@ https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 ### Basic Search
 
 1. Open Raycast (`⌘ + Space` or your custom hotkey)
-2. Type "Search Antigravity Projects" or set a custom alias
+2. Type the command for your preferred editor:
+   - "Search Antigravity Projects"
+   - "Search Cursor Projects"
+   - "Search VS Code Projects"
+   - "Search Trae Projects"
 3. Start typing to filter your projects
 4. Press `Enter` to open the selected project
 
@@ -47,11 +54,20 @@ https://github.com/user-attachments/assets/fd265a58-3540-40f4-92c8-cd39a7542fbd
 
 ### Available Actions
 
-| Action                | Shortcut    | Description                               |
-| --------------------- | ----------- | ----------------------------------------- |
-| Open with Antigravity | `Enter`     | Opens the project in Antigravity IDE      |
-| Show in Finder        | `⌘ + Enter` | Opens the project folder in Finder        |
-| Copy Path             | `⌘ + C`     | Copies the full project path to clipboard |
+| Action              | Shortcut     | Description                               |
+| ------------------- | ------------ | ----------------------------------------- |
+| Open with Editor    | `Enter`      | Opens the project in the selected editor  |
+| Show in Finder      | `⌘ + Enter`  | Opens the project folder in Finder        |
+| Copy Path           | `⌘ + C`      | Copies the full project path to clipboard |
+
+### Commands
+
+| Command                      | Description                              |
+| ---------------------------- | ---------------------------------------- |
+| Search Antigravity Projects  | Search and open projects with Antigravity|
+| Search Cursor Projects       | Search and open projects with Cursor     |
+| Search VS Code Projects      | Search and open projects with VS Code    |
+| Search Trae Projects         | Search and open projects with Trae       |
 
 ## ⚙️ Configuration
 
@@ -85,7 +101,25 @@ How many folder levels deep to search. Higher values find more projects but take
 
 **Default:** `~/.antigravity/antigravity/bin/agy`
 
-The full path to the Antigravity IDE command-line executable. This extension uses this command to open your projects in Antigravity IDE.
+The full path to the Antigravity IDE command-line executable.
+
+### Cursor Command Path
+
+**Default:** `cursor`
+
+The full path to the Cursor command-line executable.
+
+### VS Code Command Path
+
+**Default:** `code`
+
+The full path to the VS Code command-line executable.
+
+### Trae Command Path
+
+**Default:** `trae`
+
+The full path to the Trae command-line executable.
 
 #### 🔍 How to Find Your Command Path
 
@@ -180,13 +214,11 @@ ls -la ~/.antigravity/antigravity/bin/agy
 
 **For other IDE commands:**
 
-This extension can work with other IDEs by changing the command path:
-
 - **Cursor:** `/usr/local/bin/cursor` or `/Applications/Cursor.app/Contents/Resources/app/bin/cursor`
-- **VSCode:** `/usr/local/bin/code` or `/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code`
-- **Neovim:** `/usr/local/bin/nvim`
+- **VS Code:** `/usr/local/bin/code` or `/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code`
+- **Trae:** `/usr/local/bin/trae` or wherever Trae is installed
 
-Just make sure the command supports the `-n` flag for opening a new window with a directory.
+Just make sure the command supports opening a directory as an argument.
 
 ### Ignored Folders Pattern
 
@@ -235,6 +267,9 @@ You can also configure the extension using environment variables:
 ```bash
 export ANTIGRAVITY_PROJECTS_DIR="~/Code"
 export ANTIGRAVITY_AGY_PATH="/usr/local/bin/agy"
+export CURSOR_COMMAND_PATH="/usr/local/bin/cursor"
+export CODE_COMMAND_PATH="/usr/local/bin/code"
+export TRAE_COMMAND_PATH="/usr/local/bin/trae"
 export ANTIGRAVITY_IGNORED_FOLDERS_PATTERN="^\.|^node_modules$"
 ```
 
@@ -309,10 +344,13 @@ npm run fix-lint
 
 ```
 src/
-├── index.tsx      # Main command component
-├── config.ts      # Configuration and preferences
-├── utils.ts       # Utility functions (search, open)
-└── types.ts       # TypeScript type definitions
+├── index.tsx        # Main command component & shared ProjectList
+├── open-cursor.tsx  # Cursor command entry
+├── open-code.tsx    # VS Code command entry
+├── open-trae.tsx    # Trae command entry
+├── config.ts        # Configuration and preferences
+├── utils.ts         # Utility functions (search, open)
+└── types.ts         # TypeScript type definitions
 ```
 
 ## 📝 License
@@ -322,7 +360,7 @@ MIT
 ## 🙏 Acknowledgments
 
 - Built for [Raycast](https://raycast.com/)
-- Designed for [Antigravity IDE](https://antigravity.dev/)
+- Designed for [Antigravity IDE](https://antigravity.dev/), [Cursor](https://cursor.com/), [VS Code](https://code.visualstudio.com/), and [Trae](https://trae.ai/)
 
 ---
 

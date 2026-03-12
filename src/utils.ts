@@ -1,6 +1,6 @@
 /// <reference types="../raycast-env.d.ts" />
 
-import type { Project } from "./types";
+import type { Project, EditorType } from "./types";
 import fs from "fs/promises";
 import { homedir } from "os";
 import path from "path";
@@ -11,7 +11,7 @@ import { execFile } from "child_process";
 import { promisify } from "util";
 import {
   getIgnoredFoldersPattern,
-  getAgyCommandPath,
+  getEditorCommandPath,
   getDefaultSearchFolder,
 } from "./config";
 
@@ -35,16 +35,26 @@ export function expandPath(inputPath: string): string {
   return inputPath.replace(/^~/, homedir());
 }
 
-export async function openInAntigravity(projectPath: string): Promise<void> {
+export async function openWithEditor(editor: EditorType, projectPath: string): Promise<void> {
+  const editorNames: Record<EditorType, string> = {
+    antigravity: "Antigravity",
+    cursor: "Cursor",
+    code: "VS Code",
+    trae: "Trae",
+  };
+  const name = editorNames[editor];
+
   try {
-    const agyPath = getAgyCommandPath();
-    await execFileAsync(agyPath, ["-n", projectPath]);
-    await showHUD(`Opening ${path.basename(projectPath)} with Antigravity`);
+    const command = getEditorCommandPath(editor);
+    const args = editor === "antigravity" ? ["-n", projectPath] : [projectPath];
+
+    await execFileAsync(command, args);
+    await showHUD(`Opening ${path.basename(projectPath)} with ${name}`);
   } catch (error) {
-    console.error("Error opening with Antigravity:", error);
+    console.error(`Error opening with ${name}:`, error);
     await showToast({
       style: Toast.Style.Failure,
-      title: "Failed to open with Antigravity",
+      title: `Failed to open with ${name}`,
       message: error instanceof Error ? error.message : String(error),
     });
     throw error;

@@ -16,6 +16,24 @@
       "title": "Search Antigravity Projects",
       "description": "Search projects to open with Antigravity IDE",
       "mode": "view"
+    },
+    {
+      "name": "open-cursor",
+      "title": "Search Cursor Projects",
+      "description": "Search projects to open with Cursor",
+      "mode": "view"
+    },
+    {
+      "name": "open-code",
+      "title": "Search VS Code Projects",
+      "description": "Search projects to open with VS Code",
+      "mode": "view"
+    },
+    {
+      "name": "open-trae",
+      "title": "Search Trae Projects",
+      "description": "Search projects to open with Trae",
+      "mode": "view"
     }
   ],
   "preferences": [
@@ -42,6 +60,30 @@
       "required": false,
       "default": "",
       "description": "Full path to the agy command (leave empty to use default: ~/.antigravity/antigravity/bin/agy)"
+    },
+    {
+      "name": "cursorCommandPath",
+      "title": "Cursor Command Path",
+      "type": "textfield",
+      "required": false,
+      "default": "",
+      "description": "Full path to the cursor command (leave empty to use default: cursor)"
+    },
+    {
+      "name": "codeCommandPath",
+      "title": "VS Code Command Path",
+      "type": "textfield",
+      "required": false,
+      "default": "",
+      "description": "Full path to the code command (leave empty to use default: code)"
+    },
+    {
+      "name": "traeCommandPath",
+      "title": "Trae Command Path",
+      "type": "textfield",
+      "required": false,
+      "default": "",
+      "description": "Full path to the trae command (leave empty to use default: trae)"
     },
     {
       "name": "ignoredFoldersPattern",

@@ -14,6 +14,12 @@ type ExtensionPreferences = {
   "searchDepth": string,
   /** Antigravity Command Path - Full path to the agy command (leave empty to use default: ~/.antigravity/antigravity/bin/agy) */
   "agyCommandPath": string,
+  /** Cursor Command Path - Full path to the cursor command (leave empty to use default: cursor) */
+  "cursorCommandPath": string,
+  /** VS Code Command Path - Full path to the code command (leave empty to use default: code) */
+  "codeCommandPath": string,
+  /** Trae Command Path - Full path to the trae command (leave empty to use default: trae) */
+  "traeCommandPath": string,
   /** Ignored Folders Pattern - Regex pattern for folders to ignore during search (leave empty to use default) */
   "ignoredFoldersPattern": string
 }
@@ -24,10 +30,22 @@ declare type Preferences = ExtensionPreferences
 declare namespace Preferences {
   /** Preferences accessible in the `index` command */
   export type Index = ExtensionPreferences & {}
+  /** Preferences accessible in the `open-cursor` command */
+  export type OpenCursor = ExtensionPreferences & {}
+  /** Preferences accessible in the `open-code` command */
+  export type OpenCode = ExtensionPreferences & {}
+  /** Preferences accessible in the `open-trae` command */
+  export type OpenTrae = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
   /** Arguments passed to the `index` command */
   export type Index = {}
+  /** Arguments passed to the `open-cursor` command */
+  export type OpenCursor = {}
+  /** Arguments passed to the `open-code` command */
+  export type OpenCode = {}
+  /** Arguments passed to the `open-trae` command */
+  export type OpenTrae = {}
 }
 

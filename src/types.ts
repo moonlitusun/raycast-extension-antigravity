@@ -3,3 +3,5 @@ export interface Project {
   path: string;
   lastModifiedTime: number;
 }
+
+export type EditorType = "cursor" | "code" | "antigravity" | "trae";

@@ -34,21 +34,38 @@ export function getIgnoredFoldersPattern(): RegExp {
   return DEFAULT_IGNORED_FOLDERS_PATTERN;
 }
 
-export function getAgyCommandPath(): string {
+export function getEditorCommandPath(editor: "antigravity" | "cursor" | "code" | "trae"): string {
+  const prefKeys: Record<string, keyof Preferences> = {
+    antigravity: "agyCommandPath",
+    cursor: "cursorCommandPath",
+    code: "codeCommandPath",
+    trae: "traeCommandPath",
+  };
+  const envKeys: Record<string, string> = {
+    antigravity: "ANTIGRAVITY_AGY_PATH",
+    cursor: "CURSOR_COMMAND_PATH",
+    code: "CODE_COMMAND_PATH",
+    trae: "TRAE_COMMAND_PATH",
+  };
+  const defaults: Record<string, string> = {
+    antigravity: path.join(homedir(), ".antigravity", "antigravity", "bin", "agy"),
+    cursor: "cursor",
+    code: "code",
+    trae: "trae",
+  };
+
   try {
     const preferences = getPreferenceValues<Preferences>();
-    if (preferences.agyCommandPath) {
-      return preferences.agyCommandPath;
-    }
+    const value = preferences[prefKeys[editor]] as string;
+    if (value) return value;
   } catch {
     // Ignore errors when reading preferences
   }
 
-  if (process.env.ANTIGRAVITY_AGY_PATH) {
-    return process.env.ANTIGRAVITY_AGY_PATH;
-  }
+  const envValue = process.env[envKeys[editor]];
+  if (envValue) return envValue;
 
-  return path.join(homedir(), ".antigravity", "antigravity", "bin", "agy");
+  return defaults[editor];
 }
 
 export function getDefaultSearchFolder(): string {
